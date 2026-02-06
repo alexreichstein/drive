@@ -23,10 +23,10 @@ public class FileService {
         this.storageService = storageService;
     }
 
-    // 📤 Upload file
+    //  Upload file
     public FileEntity uploadFile(MultipartFile file, Long folderId) throws Exception {
 
-        // 🔍 TEMP DEBUG – LÄGG HÄR
+        //  TEMP DEBUG – LÄGG HÄR
         System.out.println("---- UPLOAD DEBUG ----");
         System.out.println("Original filename: " + file.getOriginalFilename());
         System.out.println("Size: " + file.getSize());
@@ -50,7 +50,7 @@ public class FileService {
         return fileRepository.save(entity);
     }
 
-    // 📥 Download file
+    //  Download file
     public byte[] downloadFile(Long fileId) throws Exception {
 
         FileEntity file = fileRepository.findById(fileId)
@@ -60,7 +60,7 @@ public class FileService {
         return storageService.load(file.getStoragePath());
     }
 
-    // ❌ Delete file
+    // Delete file
     public void deleteFile(Long fileId) throws Exception {
 
         FileEntity file = fileRepository.findById(fileId)

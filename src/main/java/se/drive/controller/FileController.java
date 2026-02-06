@@ -18,19 +18,29 @@ public class FileController {
         this.fileService = fileService;
     }
 
-    // 📤 Upload file
+    //  Upload file
     @PostMapping(
             value = "/upload",
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE
     )
     public FileEntity upload(
-            @RequestParam("file") MultipartFile file,
+            @RequestPart("file") MultipartFile file,
             @RequestParam("folderId") Long folderId
     ) throws Exception {
+
+        //  Tillfällig debug (ta bort sen)
+        System.out.println("---- UPLOAD DEBUG ----");
+        System.out.println("Original filename: " + file.getOriginalFilename());
+        System.out.println("Size: " + file.getSize());
+        System.out.println("Content type: " + file.getContentType());
+        System.out.println("Is empty: " + file.isEmpty());
+        System.out.println("Bytes length: " + file.getBytes().length);
+        System.out.println("----------------------");
+
         return fileService.uploadFile(file, folderId);
     }
 
-    // 📥 Download file
+    //  Download file
     @GetMapping("/{id}")
     public ResponseEntity<byte[]> download(@PathVariable Long id) throws Exception {
 
@@ -38,13 +48,15 @@ public class FileController {
         String filename = fileService.getFilename(id);
 
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION,
-                        "attachment; filename=\"" + filename + "\"")
+                .header(
+                        HttpHeaders.CONTENT_DISPOSITION,
+                        "attachment; filename=\"" + filename + "\""
+                )
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .body(data);
     }
 
-    // 🗑 Delete file
+    //  Delete file
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) throws Exception {
         fileService.deleteFile(id);
