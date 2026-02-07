@@ -1,14 +1,14 @@
 package se.drive.controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import se.drive.dto.CreateFolderRequest;
 import se.drive.model.Folder;
 import se.drive.service.FolderService;
 
+/**
+ * REST API för mapphantering.
+ * Hanterar skapande av mappar och undermappar.
+ */
 @RestController
 @RequestMapping("/api/folders")
 public class FolderController {
@@ -19,6 +19,12 @@ public class FolderController {
         this.folderService = folderService;
     }
 
+    /**
+     * Skapar en ny mapp.
+     *
+     * @param request Innehåller mappnamn och parent ID
+     * @return Den skapade mappen
+     */
     @PostMapping
     public Folder createFolder(@RequestBody CreateFolderRequest request) {
         return folderService.createFolder(
