@@ -37,6 +37,13 @@ public class Folder {
     private Folder parent;
 
     /**
+     * Användaren som äger denna mapp.
+     */
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    /**
      * Undermappar till denna mapp.
      * @JsonIgnore Behövs för att förhindra oändlig loop
      */

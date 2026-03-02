@@ -25,4 +25,12 @@ public interface FolderRepository extends JpaRepository<Folder, Long> {
      * @return Lista med undermappar
      */
     List<Folder> findByParentId(Long parentId);
+
+    /**
+     * Hämtar alla mappar som tillhör en specifik användare.
+     *
+     * @param userId Användarens ID
+     * @return Lista med användarens mappar
+     */
+    List<Folder> findByUserId(Long userId);
 }

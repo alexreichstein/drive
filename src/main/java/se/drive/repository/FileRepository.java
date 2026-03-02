@@ -18,4 +18,12 @@ public interface FileRepository extends JpaRepository<FileEntity, Long> {
      * @return Lista med filer i mappen
      */
     List<FileEntity> findByFolderId(Long folderId);
+
+    /**
+     * Hämtar alla filer som tillhör en specifik användare.
+     *
+     * @param userId Användarens ID
+     * @return Lista med användarens filer
+     */
+    List<FileEntity> findByUserId(Long userId);
 }

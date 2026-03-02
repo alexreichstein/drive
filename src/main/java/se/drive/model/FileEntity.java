@@ -50,4 +50,11 @@ public class FileEntity {
     @ManyToOne
     @JoinColumn(name = "folder_id", nullable = false)
     private Folder folder;
+
+    /**
+     * Användaren som äger filen.
+     */
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 }
